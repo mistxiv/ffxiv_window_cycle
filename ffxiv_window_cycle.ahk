@@ -1,10 +1,8 @@
 #Persistent
 #SingleInstance Force
 #WinActivateForce
-SetWinDelay, -1
 
 idx := 0
-DetectHiddenWindows, On ; Finds windows even if they're on another virtual desktop
 XIVPIDs := Array()
 
 SetTimer, FindFFXIVWindows, 1000
