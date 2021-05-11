@@ -1,7 +1,12 @@
 #Persistent
 #SingleInstance Force
 #WinActivateForce
-SetWinDelay, 0
+SetWinDelay, -1
+
+WindowWidthBig := A_ScreenWidth
+WindowHeightBig := A_ScreenHeight
+WindowWidthSmall := 1024
+WindowHeightSmall := 720
 
 idx := 0
 XIVPIDs := Array()
@@ -34,11 +39,11 @@ PgUp::
 	for pid in XIVPIDs {
 		that_pid := XIVPIDs[pid]
         if (that_pid != this_pid) {
-        	WinMove, ahk_pid %that_pid%,,0,0,1024,768
+        	WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
 	}
-	WinMove, ahk_pid %this_pid%,,0,0,1920,1280
 	WinActivate, ahk_pid %this_pid%
+	WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
     return
 PgDn::
     idx--
@@ -48,11 +53,11 @@ PgDn::
     for pid in XIVPIDs {
 		that_pid := XIVPIDs[pid]
         if (that_pid != this_pid) {
-        	WinMove, ahk_pid %that_pid%,,0,0,1024,768
+        	WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
 	}
-	WinMove, ahk_pid %this_pid%,,0,0,1920,1280
 	WinActivate, ahk_pid %this_pid%
+	WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
     return
 
 ; https://sites.google.com/site/ahkref/custom-functions/sortarray
