@@ -42,8 +42,8 @@ PgUp::
         	WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
 	}
-	WinActivate, ahk_pid %this_pid%
 	WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
+	WinActivate, ahk_pid %this_pid%
     return
 PgDn::
     idx--
@@ -56,8 +56,8 @@ PgDn::
         	WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
 	}
-	WinActivate, ahk_pid %this_pid%
 	WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
+	WinActivate, ahk_pid %this_pid%
     return
 
 ; https://sites.google.com/site/ahkref/custom-functions/sortarray
