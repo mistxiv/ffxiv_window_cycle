@@ -1,6 +1,7 @@
 #Persistent
 #SingleInstance Force
 #WinActivateForce
+SetWinDelay, 0
 
 idx := 0
 XIVPIDs := Array()
@@ -30,14 +31,28 @@ PgUp::
     if (idx > XIVPIDsCount)
         idx := 1
     this_pid := XIVPIDs[idx]
-    WinActivate, ahk_pid %this_pid%
+	for pid in XIVPIDs {
+		that_pid := XIVPIDs[pid]
+        if (that_pid != this_pid) {
+        	WinMove, ahk_pid %that_pid%,,0,0,1024,768
+        }
+	}
+	WinMove, ahk_pid %this_pid%,,0,0,1920,1280
+	WinActivate, ahk_pid %this_pid%
     return
 PgDn::
     idx--
     if (idx < 1)
         idx := XIVPIDsCount
     this_pid := XIVPIDs[idx]
-    WinActivate, ahk_pid %this_pid%
+    for pid in XIVPIDs {
+		that_pid := XIVPIDs[pid]
+        if (that_pid != this_pid) {
+        	WinMove, ahk_pid %that_pid%,,0,0,1024,768
+        }
+	}
+	WinMove, ahk_pid %this_pid%,,0,0,1920,1280
+	WinActivate, ahk_pid %this_pid%
     return
 
 ; https://sites.google.com/site/ahkref/custom-functions/sortarray
