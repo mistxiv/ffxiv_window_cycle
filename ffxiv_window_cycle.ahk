@@ -1,12 +1,14 @@
 #Persistent
 #SingleInstance Force
 #WinActivateForce
-SetWinDelay, -1
+DetectHiddenWindows, On
+SetWinDelay, 0
 
 WindowWidthBig := A_ScreenWidth
 WindowHeightBig := A_ScreenHeight
 WindowWidthSmall := 1024
 WindowHeightSmall := 720
+
 
 idx := 0
 XIVPIDs := Array()
@@ -25,8 +27,12 @@ FindFFXIVWindows:
     }
 
     SortArray(XIVPIDs)
-    for index, pid in XIVPIDs
-        WinSetTitle, ahk_pid %pid%,, XIV%index% - %pid%
+    for index, pid in XIVPIDs {
+        WinGetTitle, Title, ahk_pid %pid%
+        if (!InStr(Title, %pid%)) {
+            WinSetTitle, ahk_pid %pid%,, %Title% - %pid%
+        }
+    }
 
     return
 
