@@ -27,16 +27,23 @@ FindFFXIVWindows:
     }
 
     SortArray(XIVPIDs)
+
     for index, pid in XIVPIDs {
         WinGetTitle, Title, ahk_pid %pid%
         if (!InStr(Title, %pid%)) {
             WinSetTitle, ahk_pid %pid%,, %Title% - %pid%
+        }
+        if WinActive("ahk_pid" pid) {
+            WinMove, ahk_pid %pid%,,,,%WindowWidthBig%,%WindowHeightBig%
+        } else {
+            WinMove, ahk_pid %pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
     }
 
     return
 
 ; Key names: https://www.autohotkey.com/docs/KeyList.htm
+#IfWinActive ahk_class FFXIVGAME
 PgUp::
     idx++
     if (idx > XIVPIDsCount)
@@ -51,6 +58,8 @@ PgUp::
 	WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
 	WinActivate, ahk_pid %this_pid%
     return
+
+#IfWinActive ahk_class FFXIVGAME
 PgDn::
     idx--
     if (idx < 1)
@@ -59,6 +68,7 @@ PgDn::
     for pid in XIVPIDs {
 		that_pid := XIVPIDs[pid]
         if (that_pid != this_pid) {
+            WinMinimize, ahk_pid %that_pid%
         	WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
 	}
