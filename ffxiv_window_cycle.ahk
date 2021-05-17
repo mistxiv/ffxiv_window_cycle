@@ -30,8 +30,8 @@ FindFFXIVWindows:
 
     for index, pid in XIVPIDs {
         WinGetTitle, Title, ahk_pid %pid%
-        if (!InStr(Title, %pid%)) {
-            WinSetTitle, ahk_pid %pid%,, %Title% - %pid%
+        if (not InStr(Title, pid)) {
+        WinSetTitle, ahk_pid %pid%,, %Title% - %pid%
         }
         if WinActive("ahk_pid" pid) {
             WinMove, ahk_pid %pid%,,,,%WindowWidthBig%,%WindowHeightBig%
