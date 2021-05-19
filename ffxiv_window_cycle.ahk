@@ -1,14 +1,12 @@
 #Persistent
 #SingleInstance Force
 #WinActivateForce
-DetectHiddenWindows, On
 SetWinDelay, 0
 
 WindowWidthBig := A_ScreenWidth
 WindowHeightBig := A_ScreenHeight
 WindowWidthSmall := 1024
 WindowHeightSmall := 720
-
 
 idx := 0
 XIVPIDs := Array()
@@ -49,14 +47,15 @@ PgUp::
     if (idx > XIVPIDsCount)
         idx := 1
     this_pid := XIVPIDs[idx]
-	for pid in XIVPIDs {
-		that_pid := XIVPIDs[pid]
+    for pid in XIVPIDs {
+        that_pid := XIVPIDs[pid]
         if (that_pid != this_pid) {
-        	WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
+            WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
-	}
-	WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
-	WinActivate, ahk_pid %this_pid%
+    }
+    WinActivate, ahk_pid %this_pid%
+    WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
+
     return
 
 #IfWinActive ahk_class FFXIVGAME
@@ -66,14 +65,15 @@ PgDn::
         idx := XIVPIDsCount
     this_pid := XIVPIDs[idx]
     for pid in XIVPIDs {
-		that_pid := XIVPIDs[pid]
+        that_pid := XIVPIDs[pid]
         if (that_pid != this_pid) {
             WinMinimize, ahk_pid %that_pid%
-        	WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
+            WinMove, ahk_pid %that_pid%,,,,%WindowWidthSmall%,%WindowHeightSmall%
         }
-	}
-	WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
-	WinActivate, ahk_pid %this_pid%
+    }
+    WinActivate, ahk_pid %this_pid%
+    WinMove, ahk_pid %this_pid%,,,,%WindowWidthBig%,%WindowHeightBig%
+
     return
 
 ; https://sites.google.com/site/ahkref/custom-functions/sortarray
